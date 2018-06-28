@@ -129,7 +129,7 @@ void IDF(string term, int a){
         }
 
     }
-    cout<<"Counter : "<<counter<<endl;
+
     idf[a] = log10((double)FileNumber/counter);
 }
 
@@ -263,17 +263,14 @@ int main()
     for(int i=0; i<FileNumber; i++){
         cin>>FileName[i];
     }
-    //FileName = "TextToRead1.txt";
 
-    //iFile.open("TextToRead1.txt");
     for(int file=0; file<FileNumber; file++){
 
         iFile.open(FileName[file].c_str());
 
         string str;
 
-        if(iFile.is_open())
-        {
+        if(iFile.is_open()){
 
             int LineNo=0 ;
 
@@ -300,10 +297,10 @@ int main()
             string z = strs.str();
 
             pureWordFile = pureWordFile+ z+".txt";
-            //oFile.open("pureWords.txt");
-            cout<<pureWordFile<<endl;
-            ofstream oFile;
 
+            //cout<<pureWordFile<<endl;
+
+            ofstream oFile;
             oFile.open(pureWordFile.c_str());
 
             string WordFromTextLine, StopWord;
@@ -361,9 +358,11 @@ int main()
 
                 }
             }
+
             Do_MergeSort( 0, TotalWord[file]-1, file );
             TF(TotalWord[file], file);
 
+            /*
             cout<<"File name = "<<FileName[file]<<"\tTotal word = "<<TotalWord[file]<<endl;
             cout<<"[WORD]\t\t[NUMBER OF PRESENCE]\n";
             cout<<"================================================\n\n";
@@ -380,10 +379,12 @@ int main()
                     cout<<word[file][i]<<"\t\t"<<tf[file][i]<<endl;
             }
             cout<<endl<<endl;
+            */
+
         }
     }
-    int a=0;
 
+    int a=0;
     for(int i=0; i<FileNumber; i++){
         for(int j=0; j<TotalWord[i]; j++){
             bool flag = false;
@@ -403,27 +404,34 @@ int main()
     }
     IndividualWordsInAllFiles = a;
 
+
+    /*
     cout<<"\n\n\t\t[IDF]\n";
     cout<<"================================================\n\n";
     for(int i=0; i<a; i++){
         cout<<WordListOfAllFiles[i]<<"\t\t"<<idf[i]<<endl;
     }
     cout<<endl;
+    */
 
     TF_IDF();
     Do_MergeSortForTF_IDF( 0, IndividualWordsInAllFiles-1);
 
+    /*
     cout<<"\n\n\t[TF-IDF][Sorted in Increasing Order]\n";
     cout<<"================================================\n\n";
     for(int i=0; i<IndividualWordsInAllFiles; i++){
         cout<<WordListOfAllFiles[i]<<"\t\t"<<tf_idf[i]<<endl;
     }
+    */
 
-    cout<<"\n\nTop 5 elements having smallest tf-idf values can be considered as KEY WORDS\n\n"
-            <<"So KEY WORDS are :\n"<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    cout<<"\n\nTop 5 elements having smallest tf-idf values can be considered as KEY WORDS.\n"
+            <<"So KEY WORDS are :\n"<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+
     for(int i=0; i<5; i++){
         cout<<WordListOfAllFiles[i]<<endl;
     }
+
     cout<<"\n\n================================================\n\n";
     return 0;
 }
