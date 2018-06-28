@@ -1,0 +1,4 @@
+# Here is a simple raw code of calculating tf-idf from documents 
+to find out the key words from those docs.
+
+# I have implemented it in c++ (without STL)
